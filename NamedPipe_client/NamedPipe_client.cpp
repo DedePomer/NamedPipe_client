@@ -5,7 +5,7 @@
 
 int main()
 {
-	HANDLE hPipe;
+	HANDLE hPipe;// залупа
 	DWORD dwMode = PIPE_READMODE_MESSAGE;
 	BOOL Success, flag = TRUE, SuccessR;
 	LPSTR massage = calloc(200, sizeof(CHAR));
