@@ -5,7 +5,7 @@
 
 int main()
 {
-	HANDLE hPipe;// залупа
+	HANDLE hPipe;
 	DWORD dwMode = PIPE_READMODE_MESSAGE;
 	BOOL Success, flag = TRUE, SuccessR;
 	LPSTR massage = calloc(200, sizeof(CHAR));
@@ -40,7 +40,7 @@ int main()
 		}
 		else
 		{
-			printf("сервер отключися\n");
+			printf("Сервер отключися\n");
 		}
 		Sleep(1000);		
 		CloseHandle(hPipe);
