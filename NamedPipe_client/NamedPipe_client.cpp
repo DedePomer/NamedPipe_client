@@ -7,7 +7,7 @@ int main()
 {
 	HANDLE hPipe;
 	DWORD dwMode = PIPE_READMODE_MESSAGE;
-	BOOL Success, flag = TRUE, SuccessR;
+	BOOL Success, SuccessR;
 	LPSTR massage = calloc(200, sizeof(CHAR));
 	DWORD n;
 
@@ -20,27 +20,26 @@ int main()
 		Success = SetNamedPipeHandleState(hPipe, &dwMode, NULL, NULL);
 		if (Success)
 		{	
-			if (flag)
-			{
-				printf("Введите сообщение для сервера: \n");							
-				gets(massage);
-				WriteFile(hPipe, massage, 200, &n, NULL);
-				flag = FALSE;
-			}	
+			printf("Введите сообщение для сервера: \n");							
+			gets(massage);
+			WriteFile(hPipe, massage, 200, &n, NULL);			
 			SuccessR = ReadFile(hPipe, massage, 200, &n,NULL);
 			if (SuccessR)
 			{
-				printf("\nОтвет: %s\n",massage);
-				flag = TRUE;
+				printf("-----------------------\nОтвет: %s\n",massage);
 				if (massage == NULL)
 				{
 					printf("\n");
 				}
 			}
+			else
+			{
+				printf("Сервер отключился\n");
+			}
 		}
 		else
 		{
-			printf("Сервер отключися\n");
+			printf("Сервер вне сети\n");
 		}
 		Sleep(1000);		
 		CloseHandle(hPipe);
